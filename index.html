@@ -494,16 +494,26 @@ Batmeez
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(.9);
-    background: rgba(15,23,42,.9);
-    border: 1px solid rgba(148,163,184,.4);
+
+    /* DARKER + more contrast */
+    background: rgba(5, 8, 16, .96);
+    box-shadow: 0 25px 60px rgba(0,0,0,.9);
+    backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,.18);
     border-radius: 18px;
-    padding: 18px 22px;
+    padding: 20px 26px;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+
     opacity: 0;
     transition: opacity .8s ease, transform .8s ease;
     text-align: center;
+
+    /* make sure it sits ABOVE fireworks */
+    z-index: 1000;
   ">
+
   🎆 Happy New Year! 🎆<br>
   I hope this year is kind to you.<br><br>
 
@@ -623,3 +633,4 @@ Batmeez
 
 </body>
 </html>
+
