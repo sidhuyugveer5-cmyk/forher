@@ -48,7 +48,6 @@
       isolation: isolate;
     }
 
-    /* Subtle floating glow blobs */
     .glow {
       position: absolute;
       border-radius: 999px;
@@ -200,16 +199,6 @@
       min-height: 220px;
     }
 
-    .quote-text {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-main);
-    }
-
-    .quote-text span {
-      color: var(--accent);
-    }
-
     .quote-footer {
       margin-top: 14px;
       display: flex;
@@ -302,7 +291,6 @@
       }
     }
 
-    /* Scroll hint button */
     .scroll-hint {
       display: inline-flex;
       align-items: center;
@@ -327,7 +315,6 @@
       color: var(--accent);
     }
 
-    /* Subtle type-looking text in intro */
     .type-line {
       margin-top: 12px;
       display: inline-block;
@@ -341,23 +328,13 @@
     }
 
     @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
+      from { width: 0; }
+      to { width: 100%; }
     }
 
     @keyframes caret {
-      0%,
-      50% {
-        border-color: var(--highlight);
-      }
-      50.01%,
-      100% {
-        border-color: transparent;
-      }
+      0%, 50% { border-color: var(--highlight); }
+      50.01%, 100% { border-color: transparent; }
     }
   </style>
 </head>
@@ -369,7 +346,7 @@
     <header>
       <h1>For <span>Ustaad Ji</span></h1>
       <p>
-        I made this little corner of the internet just for you.  
+        I made this little corner of the internet just for you.<br>
         No crowd, no noise — just my words and your eyes.
       </p>
       <div class="date-tag">
@@ -445,7 +422,7 @@ Batmeez
                   Late night Tims aali chaah.
                   My ride to Barrie ferr bus ch naal baithna.
                   The time I used to sleep while talking to you and then wake up with your voice.
-                  I can never forget these things and alot more...
+                  I can never forget these things and a lot more...
                 </div>
               </li>
               <li class="timeline-item">
@@ -459,7 +436,7 @@ Batmeez
 
           <div class="quote-footer">
             <div class="footer-note">
-              You don’t have to say anything about this page.  
+              You don’t have to say anything about this page.<br>
               Just knowing you’ve seen it is enough for me.
             </div>
             <div class="signature">Batmeez</div>
@@ -469,76 +446,28 @@ Batmeez
         <!-- Floating hearts layer -->
         <div class="hearts" id="hearts-layer"></div>
       </section>
+
+      <!-- Button to go to the "I love you" page -->
       <div style="margin: 22px auto 8px; text-align: center;">
-  <button id="celebrateBtn"
-    style="
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(248,113,113,.6);
-      background: rgba(248,113,113,.15);
-      color: #ff8ba7;
-      font-size: .9rem;
-      cursor: pointer;
-    ">
-    tap here after you finish reading ✨
-  </button>
-</div>
-
-<!-- Fireworks canvas -->
-<canvas id="fwCanvas" style="position:fixed; inset:0; pointer-events:none; display:none;"></canvas>
-
-<!-- New Year message -->
-      <div id="overlay"
-  style="
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.75);
-    opacity: 0;
-    transition: opacity .5s ease;
-    z-index: 900;
-  ">
-</div>
-
-<div id="nyMessage"
-  style="
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(.9);
-
-    background: #020617;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 18px;
-    padding: 22px 26px;
-    color: #fff;
-    font-size: 1.25rem;
-
-    box-shadow: 0 35px 70px rgba(0,0,0,.95);
-    backdrop-filter: blur(8px);
-
-    opacity: 0;
-    transition: opacity .8s ease, transform .8s ease;
-    text-align: center;
-
-    z-index: 1001;
-  ">
-
-
-  🎆 Happy New Year! 🎆<br>
-  I hope this year is kind to you.<br><br>
-
-  <span id="loveLine" style="opacity:0; transition:opacity 1.2s ease;">
-    There’s something else I want you to know: <br>
-    <strong style="color:#ff8ba7;">I love you.</strong>
-  </span>
-</div>
-
-
+        <button
+          onclick="window.location.href='love.html'"
+          style="
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(248,113,113,.6);
+            background: rgba(248,113,113,.15);
+            color: #ff8ba7;
+            font-size: .9rem;
+            cursor: pointer;
+          ">
+          tap here after you finish reading ✨
+        </button>
+      </div>
     </main>
   </div>
 
+  <!-- Hearts script -->
   <script>
-    // Simple floating hearts
     (function () {
       const container = document.getElementById("hearts-layer");
       if (!container) return;
@@ -550,8 +479,8 @@ Batmeez
         heart.className = "heart";
         heart.textContent = "♥";
 
-        const delay = Math.random() * -8; // negative so they start at random positions
-        const left = 10 + Math.random() * 80; // between 10% and 90%
+        const delay = Math.random() * -8;
+        const left = 10 + Math.random() * 80;
 
         heart.style.left = left + "%";
         heart.style.animationDelay = delay + "s";
@@ -562,101 +491,5 @@ Batmeez
       }
     })();
   </script>
-  <script>
-  const btn = document.getElementById("celebrateBtn");
-  const canvas = document.getElementById("fwCanvas");
-  const msg = document.getElementById("nyMessage");
-  const ctx = canvas.getContext("2d");
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resize);
-  resize();
-
-  let particles = [];
-
-  function firework(x, y) {
-    for (let i = 0; i < 40; i++) {
-      particles.push({
-        x,
-        y,
-        angle: Math.random() * Math.PI * 2,
-        speed: 2 + Math.random() * 4,
-        life: 60 + Math.random() * 20,
-        color: `hsl(${Math.random() * 360}, 80%, 60%)`
-      });
-    }
-  }
-
-  function animate() {
-    ctx.fillStyle = "rgba(0,0,0,.25)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach((p, i) => {
-      p.x += Math.cos(p.angle) * p.speed;
-      p.y += Math.sin(p.angle) * p.speed + 0.05;
-      p.life--;
-
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-      ctx.fill();
-
-      if (p.life <= 0) particles.splice(i, 1);
-    });
-
-    if (particles.length > 0) requestAnimationFrame(animate);
-  }
-
-  btn.addEventListener("click", () => {
-    canvas.style.display = "block";
-
-    // make a few fireworks
-    const overlay = document.getElementById("overlay");
-
-setTimeout(() => {
-  overlay.style.opacity = "1";
-  msg.style.opacity = "1";
-  msg.style.transform = "translate(-50%, -50%) scale(1)";
-
-  setTimeout(() => {
-    const love = document.getElementById("loveLine");
-    love.style.opacity = "1";
-  }, 1600);
-}, 1200);
-
-
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => {
-        firework(
-          Math.random() * canvas.width * 0.9 + canvas.width * 0.05,
-          Math.random() * canvas.height * 0.5 + canvas.height * 0.1
-        );
-        animate();
-      }, i * 400);
-    }
-
-    // show the message
-    setTimeout(() => {
-      msg.style.opacity = "1";
-      msg.style.transform = "translate(-50%, -50%) scale(1)";
-      setTimeout(() => {
-  const love = document.getElementById("loveLine");
-  love.style.opacity = "1";
-}, 1600);
-
-    }, 1200);
-
-    // disable button after first use
-    btn.disabled = true;
-    btn.innerText = "✨ Happy New Year ✨";
-  });
-</script>
-
 </body>
 </html>
-
-
-
