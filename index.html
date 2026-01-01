@@ -488,6 +488,17 @@ Batmeez
 <canvas id="fwCanvas" style="position:fixed; inset:0; pointer-events:none; display:none;"></canvas>
 
 <!-- New Year message -->
+      <div id="overlay"
+  style="
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    opacity: 0;
+    transition: opacity .5s ease;
+    z-index: 900;
+  ">
+</div>
+
 <div id="nyMessage"
   style="
     position: fixed;
@@ -604,6 +615,19 @@ Batmeez
     canvas.style.display = "block";
 
     // make a few fireworks
+    const overlay = document.getElementById("overlay");
+
+setTimeout(() => {
+  overlay.style.opacity = "1";
+  msg.style.opacity = "1";
+  msg.style.transform = "translate(-50%, -50%) scale(1)";
+
+  setTimeout(() => {
+    const love = document.getElementById("loveLine");
+    love.style.opacity = "1";
+  }, 1600);
+}, 1200);
+
     for (let i = 0; i < 5; i++) {
       setTimeout(() => {
         firework(
@@ -633,4 +657,5 @@ Batmeez
 
 </body>
 </html>
+
 
