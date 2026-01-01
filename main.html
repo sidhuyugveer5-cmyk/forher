@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Ustaad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --card: #111827;
+      --accent: #ff8ba7;
+      --accent-soft: rgba(255, 139, 167, 0.2);
+      --text-main: #f9fafb;
+      --text-soft: #d1d5db;
+      --highlight: #a5b4fc;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --radius-xl: 1.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1f2937, #020617 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 960px;
+      width: 100%;
+      background: linear-gradient(145deg, #020617, #020617 55%, #111827 100%);
+      border-radius: 2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* Subtle floating glow blobs */
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(45px);
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .glow.glow-left {
+      width: 220px;
+      height: 220px;
+      background: #fb7185;
+      top: -60px;
+      left: -40px;
+    }
+
+    .glow.glow-right {
+      width: 260px;
+      height: 260px;
+      background: #3b82f6;
+      bottom: -80px;
+      right: -20px;
+    }
+
+    header {
+      padding: 32px 28px 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    header h1 span {
+      color: var(--accent);
+    }
+
+    header p {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .date-tag {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.8rem;
+      color: var(--highlight);
+    }
+
+    .date-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(248, 113, 113, 0.8);
+    }
+
+    main {
+      padding: 0 22px 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #020617, #020617 45%, #020617 80%);
+      border-radius: var(--radius-xl);
+      padding: 20px 20px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.29);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.08), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .card-heading {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card-body {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .tag-row {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+    }
+
+    .pill.highlight-pill {
+      border-color: rgba(248, 113, 113, 0.7);
+      background: rgba(248, 113, 113, 0.12);
+      color: var(--accent);
+    }
+
+    .quote-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .quote-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    .quote-text span {
+      color: var(--accent);
+    }
+
+    .quote-footer {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .signature {
+      font-family: "Pacifico", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI";
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .timeline {
+      list-style: none;
+      margin-top: 10px;
+      padding-left: 10px;
+      border-left: 1px dashed rgba(148, 163, 184, 0.4);
+    }
+
+    .timeline-item {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      left: -5px;
+      top: 4px;
+      box-shadow: 0 0 10px rgba(248, 113, 113, 0.9);
+    }
+
+    .timeline-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+
+    .timeline-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    /* Floating hearts */
+    .hearts {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 16px;
+      opacity: 0;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(20px) translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      60% {
+        transform: translateY(-140px) translateX(10px) scale(1.1);
+      }
+      100% {
+        transform: translateY(-220px) translateX(-8px) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    /* Scroll hint button */
+    .scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      margin-top: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .scroll-hint span {
+      font-size: 1rem;
+    }
+
+    .scroll-hint:hover {
+      border-color: rgba(248, 113, 113, 0.7);
+      color: var(--accent);
+    }
+
+    /* Subtle type-looking text in intro */
+    .type-line {
+      margin-top: 12px;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--highlight);
+      border-right: 2px solid var(--highlight);
+      padding-right: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4.2s steps(40, end), caret 0.8s steps(1, end) infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes caret {
+      0%,
+      50% {
+        border-color: var(--highlight);
+      }
+      50.01%,
+      100% {
+        border-color: transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="glow glow-left"></div>
+    <div class="glow glow-right"></div>
+
+    <header>
+      <h1>For <span>Ustaad Ji</span></h1>
+      <p>
+        I made this little corner of the internet just for you.  
+        No crowd, no noise — just my words and your eyes.
+      </p>
+      <div class="date-tag">
+        <div class="date-dot"></div>
+        <div>Made on Last Day</div>
+      </div>
+      <div class="type-line">
+        I hope this page makes you smile at least once. :)
+      </div>
+      <a href="#letter" class="scroll-hint">
+        <span>↓</span> Start reading
+      </a>
+    </header>
+
+    <main>
+      <!-- Left side: main letter -->
+      <section class="card" id="letter">
+        <div class="card-inner">
+          <div class="card-title">A Note from Me</div>
+          <div class="card-heading">If I could say this in person…</div>
+          <div class="card-body">
+Dear Ustaad Ji,
+
+I know I’ve tried to put my feelings into words before, and maybe the timing or the way I did it wasn’t right. So instead of another message on your phone, I wanted to leave something here — a place you can open any time, even years from now, and know exactly what you mean to me.
+
+You are THE most important person for me here, who actually can understand me even though sometimes you act like you don't but I will like to believe that you actually can. 
+Your presence, your voice, and the way you see me sometimes make my days feel different in a way I don’t really feel with anyone else.
+I know have fucked up before and made mistakes but I wanted to end this year with something that would be the most unique way to end it.
+I have no one I really want to say that please be with me always except you because it makes sense to be with you I know there is like nothing I did that can justify that I am so damn in Love but I can just write the words yaar there is no way that I can prove or show the love that I have.
+
+As you taught me, we should not lie so, yes I do feel bad sometimes when you are rude but it is ok right? If someone makes you feel that world will be nothing without them, the ones who can find you things you didn't even knew you could do, they can make you feel bad sometimes I did that too alot of times.
+So no regrets.
+Thank you for being here for me THANKS A LOT my friend, ustaad, maybe someone closer than a friend and obviously.... I dont wanna say it.
+
+I don’t expect anything from you. This isn’t here to pressure you or to make you feel like you owe me something.  
+It’s here because you deserve to know that someone out there cares about you a lot, roots for you quietly, and is really grateful that you exist.
+
+Thank you for your kindness, your patience, your laughs, and even the small random moments we’ve shared that you might have already forgotten — I haven’t. They’re all saved somewhere in my mind like little bookmarks.
+
+No matter where life takes us, I just want you to remember this one thing:
+you matter. To me, and to so many others more than you probably realize.
+
+With a lot of care,  
+Batmeez
+          </div>
+
+          <div class="tag-row">
+            <span class="pill highlight-pill">You are valued</span>
+            <span class="pill">No pressure. Just honesty.</span>
+            <span class="pill">Come back here anytime</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right side: memories & little things -->
+      <section class="card quote-card">
+        <div class="card-inner">
+          <div>
+            <div class="card-title">Little Pieces of Us</div>
+            <div class="card-heading">Things I never want to forget</div>
+
+            <ul class="timeline">
+              <li class="timeline-item">
+                <div class="timeline-label">First</div>
+                <div class="timeline-text">
+                  The way we first started talking. I didn’t know then how important you’d become to me, but now I can’t imagine my life without that moment.
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-label">Small moments</div>
+                <div class="timeline-text">
+                  The random conversations, inside jokes, and late replies — they might look tiny from outside, but they mean a lot to me.
+                  Late night Tims aali chaah.
+                  My ride to Barrie ferr bus ch naal baithna.
+                  The time I used to sleep while talking to you and then wake up with your voice.
+                  I can never forget these things and alot more...
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-label">You</div>
+                <div class="timeline-text">
+                  Your smile, your way of handling tough days, your caring nature — they inspire me more than you know.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="quote-footer">
+            <div class="footer-note">
+              You don’t have to say anything about this page.  
+              Just knowing you’ve seen it is enough for me.
+            </div>
+            <div class="signature">Batmeez</div>
+          </div>
+        </div>
+
+        <!-- Floating hearts layer -->
+        <div class="hearts" id="hearts-layer"></div>
+      </section>
+      <div style="margin: 22px auto 8px; text-align: center;">
+  <button id="celebrateBtn"
+    style="
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(248,113,113,.6);
+      background: rgba(248,113,113,.15);
+      color: #ff8ba7;
+      font-size: .9rem;
+      cursor: pointer;
+    ">
+    tap here after you finish reading ✨
+  </button>
+</div>
+
+<!-- Fireworks canvas -->
+<canvas id="fwCanvas" style="position:fixed; inset:0; pointer-events:none; display:none;"></canvas>
+
+<!-- New Year message -->
+<div id="nyMessage"
+  style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.9);
+    background: rgba(15,23,42,.9);
+    border: 1px solid rgba(148,163,184,.4);
+    border-radius: 18px;
+    padding: 18px 22px;
+    color: #fff;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity .8s ease, transform .8s ease;
+    text-align: center;
+  ">
+  🎆 Happy New Year! 🎆<br>
+  I hope this year is kind to you.<br><br>
+
+  <span id="loveLine" style="opacity:0; transition:opacity 1.2s ease;">
+    There’s something else I want you to know: <br>
+    <strong style="color:#ff8ba7;">I love you.</strong>
+  </span>
+</div>
+
+
+    </main>
+  </div>
+
+  <script>
+    // Simple floating hearts
+    (function () {
+      const container = document.getElementById("hearts-layer");
+      if (!container) return;
+
+      const HEARTS_COUNT = 12;
+
+      for (let i = 0; i < HEARTS_COUNT; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "♥";
+
+        const delay = Math.random() * -8; // negative so they start at random positions
+        const left = 10 + Math.random() * 80; // between 10% and 90%
+
+        heart.style.left = left + "%";
+        heart.style.animationDelay = delay + "s";
+        heart.style.fontSize = 14 + Math.random() * 10 + "px";
+        heart.style.opacity = 0;
+
+        container.appendChild(heart);
+      }
+    })();
+  </script>
+  <script>
+  const btn = document.getElementById("celebrateBtn");
+  const canvas = document.getElementById("fwCanvas");
+  const msg = document.getElementById("nyMessage");
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  let particles = [];
+
+  function firework(x, y) {
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x,
+        y,
+        angle: Math.random() * Math.PI * 2,
+        speed: 2 + Math.random() * 4,
+        life: 60 + Math.random() * 20,
+        color: `hsl(${Math.random() * 360}, 80%, 60%)`
+      });
+    }
+  }
+
+  function animate() {
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed + 0.05;
+      p.life--;
+
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+
+    if (particles.length > 0) requestAnimationFrame(animate);
+  }
+
+  btn.addEventListener("click", () => {
+    canvas.style.display = "block";
+
+    // make a few fireworks
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        firework(
+          Math.random() * canvas.width * 0.9 + canvas.width * 0.05,
+          Math.random() * canvas.height * 0.5 + canvas.height * 0.1
+        );
+        animate();
+      }, i * 400);
+    }
+
+    // show the message
+    setTimeout(() => {
+      msg.style.opacity = "1";
+      msg.style.transform = "translate(-50%, -50%) scale(1)";
+      setTimeout(() => {
+  const love = document.getElementById("loveLine");
+  love.style.opacity = "1";
+}, 1600);
+
+    }, 1200);
+
+    // disable button after first use
+    btn.disabled = true;
+    btn.innerText = "✨ Happy New Year ✨";
+  });
+</script>
+
+</body>
+</html>
