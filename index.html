@@ -492,7 +492,7 @@ Batmeez
   style="
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.55);
+    background: rgba(0,0,0,.75);
     opacity: 0;
     transition: opacity .5s ease;
     z-index: 900;
@@ -506,24 +506,23 @@ Batmeez
     left: 50%;
     transform: translate(-50%, -50%) scale(.9);
 
-    /* DARKER + more contrast */
-    background: rgba(5, 8, 16, .96);
-    box-shadow: 0 25px 60px rgba(0,0,0,.9);
-    backdrop-filter: blur(6px);
-
-    border: 1px solid rgba(255,255,255,.18);
+    background: #020617;
+    border: 1px solid rgba(255,255,255,.15);
     border-radius: 18px;
-    padding: 20px 26px;
+    padding: 22px 26px;
     color: #fff;
     font-size: 1.25rem;
+
+    box-shadow: 0 35px 70px rgba(0,0,0,.95);
+    backdrop-filter: blur(8px);
 
     opacity: 0;
     transition: opacity .8s ease, transform .8s ease;
     text-align: center;
 
-    /* make sure it sits ABOVE fireworks */
-    z-index: 1000;
+    z-index: 1001;
   ">
+
 
   🎆 Happy New Year! 🎆<br>
   I hope this year is kind to you.<br><br>
@@ -628,6 +627,7 @@ setTimeout(() => {
   }, 1600);
 }, 1200);
 
+
     for (let i = 0; i < 5; i++) {
       setTimeout(() => {
         firework(
@@ -657,5 +657,6 @@ setTimeout(() => {
 
 </body>
 </html>
+
 
 
