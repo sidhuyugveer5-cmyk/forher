@@ -34,6 +34,7 @@ body{
   pointer-events:none;
   z-index:1;
 }
+
 .back-btn{
   margin-top:14px;
   display:inline-block;
@@ -56,10 +57,13 @@ body{
   🎆 <strong>Happy New Year, Ustaad Ji</strong> 🎆 <br><br>
   I hope this year is kind to you. <br><br>
 
-  There’s something I really want you to know: <br>
-  <strong style="color:#ff8ba7; font-size:1.3rem;">
-    I love you.
-  </strong>
+  There’s something I really want you to know: <br><br>
+
+  <span id="loveLine" style="opacity:0; transition:opacity 1.4s ease;">
+    <strong style="color:#ff8ba7; font-size:1.3rem;">
+      I love you.
+    </strong>
+  </span>
 
   <br><br>
   <a href="index.html" class="back-btn">⬅ go back to the letter</a>
@@ -117,6 +121,12 @@ setInterval(()=>{
     Math.random()*canvas.height*0.5 + canvas.height*0.15
   );
 }, 500);
+
+// delayed reveal
+const love = document.getElementById("loveLine");
+setTimeout(() => {
+  if (love) love.style.opacity = "1";
+}, 1800);
 </script>
 
 </body>
